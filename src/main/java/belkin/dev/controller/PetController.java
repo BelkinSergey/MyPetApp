@@ -23,22 +23,29 @@ public class PetController {
 
     @PostMapping
     public ResponseEntity<PetDto> createPet(@RequestBody @Valid PetDto petToCreate) {
-        log.info("Get request for create pet: pet = {}", petToCreate);
+        log.info("получваем запрос на создание животного: pet = {}", petToCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body(petService.createPet(petToCreate));
     }
 
     @GetMapping("/{id}")
     public PetDto findPetById(@PathVariable("id") Long id) {
-        log.info("Get request for find pet by id: id{}", id);
+        log.info("получвем запрос на поиск животного по id: id{}", id);
         return petService.findPetById(id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePetById(@Valid @PathVariable Long id) {
-        log.info("Удаляем зверя по id {}", id);
+        log.info("получвем запрос на удаление животного по id {}", id);
         petService.deletePet(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PetDto> updatePet(@Valid @PathVariable("id") Long id, @Valid @RequestBody PetDto pet) {
+        log.info("получаем запрос на обноевление животного по id {}, данные {}", id, pet);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(petService.updatePet(id, pet));
     }
 
 }

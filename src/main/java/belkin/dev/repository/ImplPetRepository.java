@@ -47,5 +47,15 @@ public class ImplPetRepository implements PetRepository {
         return pet;
     }
 
+    @Override
+    public PetDto updatePet(Long id, PetDto pet) {
+        var newPet = new PetDto(id,
+                pet.getName(),
+                pet.getUserId());
+        petMap.put(id, newPet);
+
+        return newPet;
+    }
+
 
 }

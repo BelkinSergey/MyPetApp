@@ -9,4 +9,7 @@ public interface PetRepository {
 
     PetDto findPetById(Long id);
 
+    PetDto updatePet(Long id, PetDto pet);
+
+
 }

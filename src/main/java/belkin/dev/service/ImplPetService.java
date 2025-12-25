@@ -5,6 +5,8 @@ import belkin.dev.repository.PetRepository;
 import belkin.dev.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ImplPetService implements PetService {
 
@@ -40,5 +42,15 @@ public class ImplPetService implements PetService {
         userRepository.findUserById(pet.getUserId()).getPets().remove(pet);
         petRepository.deletePetById(id);
 
+    }
+
+    @Override
+    public PetDto updatePet(Long id, PetDto pet) {
+        var petResult = petRepository.findPetById(id);
+        var updatedPet = petRepository.updatePet(id, pet);
+        List<PetDto> pets = userRepository.findUserById(pet.getUserId()).getPets();
+        pets.remove(petResult);
+        pets.add(updatedPet);
+        return updatedPet;
     }
 }

@@ -1,9 +1,7 @@
 package belkin.dev.repository;
 
 import belkin.dev.model.UserDto;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface UserRepository {
 
     UserDto createUser(UserDto userToCreate);

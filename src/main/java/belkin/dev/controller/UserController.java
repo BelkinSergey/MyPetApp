@@ -24,26 +24,26 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userToCreate) {
-        log.info("Get request for create user: user = {}", userToCreate);
+        log.info("получаем запрос на создание пользователя: user = {}", userToCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userToCreate));
     }
 
     @GetMapping("/{id}")
     public UserDto findUserById(@PathVariable("id") Long id) {
-        log.info("Get request for find user by id: id{}", id);
+        log.info("получаем запрос на поиск пользователя по id: id{}", id);
         return userService.findUserById(id);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@Valid @PathVariable("id") Long id, @Valid @RequestBody UserDto user) {
-        log.info("Обновляем пользователя по id {}, данные {}", id, user);
+        log.info("получаем запрос на обноевление пользователя по id {}, данные {}", id, user);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.updateUser(id, user));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserById(@Valid @PathVariable Long id) {
-        log.info("Удаляем пользователя по id {}", id);
+        log.info("получаем запрос на удаление пользователя по id {}", id);
         userService.deleteUser(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
